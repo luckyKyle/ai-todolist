@@ -71,3 +71,25 @@ export default defineConfig([
   },
 ])
 ```
+
+## GitHub Pages 部署
+
+本项目已配置自动部署流程，推送到 `master` 分支后会自动发布到 GitHub Pages。
+
+### 一次性仓库设置
+
+1. 打开仓库 Settings -> Pages  
+2. Source 选择 **GitHub Actions**
+
+### 自动部署流程
+
+- 工作流文件：`.github/workflows/deploy-pages.yml`
+- 触发条件：`push` 到 `master`（也支持手动 `workflow_dispatch`）
+- 构建命令：`npm run build`
+- 发布目录：`dist`
+
+### 访问地址
+
+部署成功后，页面地址通常是：
+
+`https://<你的 GitHub 用户名>.github.io/ai-todolist/`

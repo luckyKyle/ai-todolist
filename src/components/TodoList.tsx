@@ -1,4 +1,4 @@
-import { type FC, useRef, useState } from 'react';
+import { type FC, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TodoItem } from './TodoItem';
 import type { Todo } from '../types';
@@ -25,15 +25,13 @@ export const TodoList: FC<TodoListProps> = ({
   skipAnimation = false,
 }) => {
   const dragItem = useRef<number | null>(null);
-  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
 
   const handleDragStart = (index: number) => {
     dragItem.current = index;
   };
 
-  const handleDragOver = (e: React.DragEvent, index: number) => {
+  const handleDragOver = (e: React.DragEvent, _index: number) => {
     e.preventDefault();
-    setDragOverIndex(index);
   };
 
   const handleDrop = (index: number) => {
@@ -41,12 +39,10 @@ export const TodoList: FC<TodoListProps> = ({
       onReorder(dragItem.current + indexOffset, index + indexOffset);
     }
     dragItem.current = null;
-    setDragOverIndex(null);
   };
 
   const handleDragEnd = () => {
     dragItem.current = null;
-    setDragOverIndex(null);
   };
 
   if (todos.length === 0) {
